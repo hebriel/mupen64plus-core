@@ -215,9 +215,9 @@ ifeq ($(OS), OSX)
 
   ifeq ($(CPU), X86)
     ifeq ($(ARCH_DETECTED), 64BITS)
-      CFLAGS += -pipe -arch x86_64 -mmacosx-version-min=10.6 -isysroot $(OSX_SDK_PATH)
+      CFLAGS += -pipe -arch x86_64 -mmacosx-version-min=10.9 -isysroot $(OSX_SDK_PATH)
     else
-      CFLAGS += -pipe -mmmx -msse -arch i686 -mmacosx-version-min=10.6 -isysroot $(OSX_SDK_PATH)
+      CFLAGS += -pipe -mmmx -msse -arch i686 -mmacosx-version-min=10.9 -isysroot $(OSX_SDK_PATH)
       ifneq ($(PROFILE), 1)
         CFLAGS += -fomit-frame-pointer
       endif
@@ -407,7 +407,7 @@ INSTALL  ?= install
 MKDIR    ?= mkdir -p
 AWK      ?= awk
 COMPILE.c = $(Q_CC)$(CC) $(OPTFLAGS) $(WARNFLAGS) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
-COMPILE.cc = $(Q_CXX)$(CXX) $(OPTFLAGS) $(WARNFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+COMPILE.cc = $(Q_CXX)$(CXX) $(OPTFLAGS) $(WARNFLAGS) $(CXXFLAGS) -stdlib=libc++ $(CPPFLAGS) $(TARGET_ARCH) -c
 COMPILE.as = $(Q_AS)$(AS) $(ASFLAGS)
 LINK.o = $(Q_LD)$(CXX) $(OPTFLAGS) $(WARNFLAGS) $(CXXFLAGS) $(LDFLAGS) $(TARGET_ARCH)
 
